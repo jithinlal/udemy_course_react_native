@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
@@ -11,7 +11,7 @@ export default function App() {
 	const addGoalHandler = goalTitle => {
 		setCourseGoals(currentGoals => [
 			...currentGoals,
-			{ id: Math.random().toString(), value: goalTitle }
+			{ id: Math.random().toString(), value: goalTitle },
 		]);
 		setIsAddMode(false);
 	};
@@ -28,7 +28,12 @@ export default function App() {
 
 	return (
 		<View style={styles.screen}>
-			<Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+			<View>
+				<View style={styles.headingContainer}>
+					<Text style={styles.heading}>Goals App</Text>
+				</View>
+				<Button title='+' onPress={() => setIsAddMode(true)} />
+			</View>
 			<GoalInput
 				visible={isAddMode}
 				onAddGoal={addGoalHandler}
@@ -51,6 +56,17 @@ export default function App() {
 
 const styles = StyleSheet.create({
 	screen: {
-		padding: 50
-	}
+		padding: 50,
+		backgroundColor: '#1e152a',
+		height: '100%',
+	},
+	headingContainer: {
+		alignItems: 'center',
+		paddingBottom: 15,
+	},
+	heading: {
+		fontSize: 30,
+		fontWeight: 'bold',
+		color: 'yellow',
+	},
 });

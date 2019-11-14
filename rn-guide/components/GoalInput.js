@@ -14,48 +14,56 @@ const GoalInput = props => {
 	};
 
 	return (
-		<Modal visible={props.visible} animationType="slide">
-			<View style={styles.inputContainer}>
-				<TextInput
-					placeholder="Course Goal"
-					style={styles.input}
-					onChangeText={goalInputHandler}
-					value={enteredGoal}
-				/>
-				<View style={styles.buttonContainer}>
-					<View style={styles.button}>
-						<Button title="CANCEL" color="red" onPress={props.onCancel} />
-					</View>
-					<View style={styles.button}>
-						<Button title="ADD" onPress={addGoalHandler} />
+		<View>
+			<Modal visible={props.visible} animationType='slide'>
+				<View style={styles.inputContainer}>
+					<TextInput
+						placeholder='What do you want to achieve?'
+						style={styles.input}
+						onChangeText={goalInputHandler}
+						value={enteredGoal}
+					/>
+					<View style={styles.buttonContainer}>
+						<View style={styles.button}>
+							<Button title='CANCEL' color='#f78571' onPress={props.onCancel} />
+						</View>
+						<View style={styles.button}>
+							<Button title='ADD' color='#a5c882' onPress={addGoalHandler} />
+						</View>
 					</View>
 				</View>
-			</View>
-		</Modal>
+			</Modal>
+		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	modalContainer: {
+		backgroundColor: '#1e152a',
+	},
 	inputContainer: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		backgroundColor: '#1e152a',
 	},
 	input: {
 		width: '80%',
-		borderColor: 'black',
-		borderWidth: 1,
 		padding: 10,
-		marginBottom: 10
+		marginBottom: 10,
+		borderBottomColor: '#a5c882',
+		borderBottomWidth: 2,
+		color: 'white',
+		// underlineColorAndroid: '#a5c882',
 	},
 	buttonContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		width: '60%'
+		width: '80%',
 	},
 	button: {
-		width: '40%'
-	}
+		width: '50%',
+	},
 });
 
 export default GoalInput;
