@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-	Button,
 	View,
-	StyleSheet,
 	Text,
+	StyleSheet,
+	Button,
 	TouchableWithoutFeedback,
 	Keyboard,
 	Alert,
@@ -11,8 +11,8 @@ import {
 
 import Card from '../components/Card';
 import Input from '../components/Input';
-import Colors from '../constants/Color';
 import NumberContainer from '../components/NumberContainer';
+import Colors from '../constants/Color';
 
 const StartGameScreen = props => {
 	const [enteredValue, setEnteredValue] = useState('');
@@ -31,14 +31,11 @@ const StartGameScreen = props => {
 	const confirmInputHandler = () => {
 		const chosenNumber = parseInt(enteredValue);
 		if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
-			setConfirmed(false);
-			Alert.alert('Invalid Number!', 'Number needs to be between 0 and 99', [
-				{
-					text: 'Okay',
-					style: 'destructive',
-					onPress: resetInputHandler,
-				},
-			]);
+			Alert.alert(
+				'Invalid number!',
+				'Number has to be a number between 1 and 99.',
+				[{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
+			);
 			return;
 		}
 		setConfirmed(true);
@@ -48,14 +45,15 @@ const StartGameScreen = props => {
 	};
 
 	let confirmedOutput;
+
 	if (confirmed) {
 		confirmedOutput = (
 			<Card style={styles.summaryContainer}>
-				<Text>You Selected</Text>
+				<Text>You selected</Text>
 				<NumberContainer>{selectedNumber}</NumberContainer>
 				<Button
 					title='START GAME'
-					onPress={props.onStartGame(selectedNumber)}
+					onPress={() => props.onStartGame(selectedNumber)}
 				/>
 			</Card>
 		);
@@ -68,13 +66,13 @@ const StartGameScreen = props => {
 			}}
 		>
 			<View style={styles.screen}>
-				<Text>Start New Game</Text>
+				<Text style={styles.title}>Start a New Game!</Text>
 				<Card style={styles.inputContainer}>
-					<Text style={styles.title}>Select a Number</Text>
+					<Text>Select a Number</Text>
 					<Input
 						style={styles.input}
 						blurOnSubmit
-						autoCapitalize='characters'
+						autoCapitalize='none'
 						autoCorrect={false}
 						keyboardType='number-pad'
 						maxLength={2}
@@ -89,7 +87,7 @@ const StartGameScreen = props => {
 								color={Colors.accent}
 							/>
 						</View>
-						<View>
+						<View style={styles.button}>
 							<Button
 								title='Confirm'
 								onPress={confirmInputHandler}

@@ -3,15 +3,15 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+
 const generateRandomBetween = (min, max, exclude) => {
 	min = Math.ceil(min);
 	max = Math.floor(max);
-	const randumNum = Math.floor(Math.random() * (max - min)) + min;
-
-	if (randumNum === exclude) {
+	const rndNum = Math.floor(Math.random() * (max - min)) + min;
+	if (rndNum === exclude) {
 		return generateRandomBetween(min, max, exclude);
 	} else {
-		return randumNum;
+		return rndNum;
 	}
 };
 
@@ -25,8 +25,8 @@ const GameScreen = props => {
 			<Text>Opponent's Guess</Text>
 			<NumberContainer>{currentGuess}</NumberContainer>
 			<Card style={styles.buttonContainer}>
-				<Button title='LOWER' onPress={() => {}}></Button>
-				<Button title='HIGHER' onPress={() => {}}></Button>
+				<Button title='LOWER' onPress={() => {}} />
+				<Button title='GREATER' onPress={() => {}} />
 			</Card>
 		</View>
 	);
