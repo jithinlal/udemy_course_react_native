@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 	},
 	listContainer: {
 		flex: 1,
-		width: Dimensions.get().width > 500 ? '60%' : '80%',
+		width: Dimensions.get('window').width > 500 ? '60%' : '80%',
 	},
 	listContent: {
 		flexGrow: 1,
