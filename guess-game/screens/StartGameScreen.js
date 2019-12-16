@@ -15,8 +15,10 @@ import {
 import Card from '../components/Card';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
 import MainButton from '../components/MainButton';
-import Colors from '../constants/Color';
+import Colors from '../constants/colors';
 
 const StartGameScreen = props => {
 	const [enteredValue, setEnteredValue] = useState('');
@@ -36,16 +38,13 @@ const StartGameScreen = props => {
 	};
 
 	useEffect(() => {
-		console.log('mounting');
 		const updateLayout = () => {
 			setButtonWidth(Dimensions.get('window').width / 4);
 		};
 
 		Dimensions.addEventListener('change', updateLayout);
-
 		return () => {
-			console.log('unmounting');
-			Dimensions.removeEventListener('change');
+			Dimensions.removeEventListener('change', updateLayout);
 		};
 	});
 
@@ -70,7 +69,7 @@ const StartGameScreen = props => {
 	if (confirmed) {
 		confirmedOutput = (
 			<Card style={styles.summaryContainer}>
-				<Text>You selected</Text>
+				<BodyText>You selected</BodyText>
 				<NumberContainer>{selectedNumber}</NumberContainer>
 				<MainButton onPress={() => props.onStartGame(selectedNumber)}>
 					START GAME
@@ -88,9 +87,9 @@ const StartGameScreen = props => {
 					}}
 				>
 					<View style={styles.screen}>
-						<Text style={styles.title}>Start a New Game!</Text>
+						<TitleText style={styles.title}>Start a New Game!</TitleText>
 						<Card style={styles.inputContainer}>
-							<Text>Select a Number</Text>
+							<BodyText>Select a Number</BodyText>
 							<Input
 								style={styles.input}
 								blurOnSubmit
@@ -138,11 +137,10 @@ const styles = StyleSheet.create({
 		fontFamily: 'open-sans-bold',
 	},
 	inputContainer: {
-		// width: 300,
-		// maxWidth: '80%',
 		width: '80%',
-		minWidth: 300,
+		// maxWidth: '80%',
 		maxWidth: '95%',
+		minWidth: 300,
 		alignItems: 'center',
 	},
 	buttonContainer: {
@@ -152,7 +150,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 	},
 	// button: {
-	// 	width: Dimensions.get('window').width / 4,
+	//   // width: 100
+	//   width: Dimensions.get('window').width / 4
 	// },
 	input: {
 		width: 50,
