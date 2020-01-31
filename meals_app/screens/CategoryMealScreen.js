@@ -1,22 +1,26 @@
 import React from 'react';
-import { StyleSheet, View, Button, Text, Platform } from 'react-native';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
 
-import { CATEGORIES } from '../data/dummy-data';
-import Colors from '../Constants/Colors';
+import { CATEGORIES, MEALS } from '../data/dummy-data';
 
 const CategoryMealScreen = props => {
+	const renderMealItem = itemData => {
+		return (
+			<View>
+				<Text>{itemData.item.title}</Text>
+			</View>
+		);
+	};
 	const categoryId = props.navigation.getParam('categoryId');
-	const selectedCategory = CATEGORIES.find(cat => cat.id === categoryId);
+	const displayedMeals = MEALS.filter(meal =>
+		meal.categoryIds.includes(categoryId)
+	);
 	return (
 		<View style={styles.screen}>
-			<Text>The category meals screen</Text>
-			<Button
-				title='Go to details'
-				onPress={() => {
-					props.navigation.navigate({
-						routeName: 'MealDetail',
-					});
-				}}
+			<FlatList
+				data={displayedMeals}
+				keyExtractor={(item, index) => item.id}
+				renderItem={renderMealItem}
 			/>
 		</View>
 	);
@@ -29,10 +33,8 @@ CategoryMealScreen.navigationOptions = navigationData => {
 	return {
 		headerTitle: selectedCategory.title,
 		headerStyle: {
-			backgroundColor:
-				Platform.OS === 'android' ? Colors.primaryColor : 'white',
+			backgroundColor: selectedCategory.color,
 		},
-		headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
 	};
 };
 
