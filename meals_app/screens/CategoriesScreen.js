@@ -27,8 +27,10 @@ const CategoriesScreen = props => {
 	);
 };
 
-CategoriesScreen.navigationOptions = {
-	headerTitle: 'Meal Categories',
+CategoriesScreen.navigationOptions = navData => {
+	return {
+		headerTitle: 'Meal Categories',
+	};
 };
 
 const styles = StyleSheet.create({
