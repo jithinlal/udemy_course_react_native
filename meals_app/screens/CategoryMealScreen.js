@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Platform } from 'react-native';
 
 import { CATEGORIES, MEALS } from '../data/dummy-data';
 import MealItem from '../Components/MealItem';
@@ -42,8 +42,11 @@ CategoryMealScreen.navigationOptions = navigationData => {
 	return {
 		headerTitle: selectedCategory.title,
 		headerStyle: {
-			backgroundColor: selectedCategory.color,
+			backgroundColor:
+				Platform.OS === 'android' ? selectedCategory.colorr : 'white',
 		},
+		headerTintColor:
+			Platform.OS === 'android' ? 'white' : selectedCategory.color,
 	};
 };
 
