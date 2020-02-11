@@ -19,7 +19,7 @@ CategoryMealScreen.navigationOptions = navigationData => {
 		headerTitle: selectedCategory.title,
 		headerStyle: {
 			backgroundColor:
-				Platform.OS === 'android' ? selectedCategory.colorr : 'white',
+				Platform.OS === 'android' ? selectedCategory.color : 'white',
 		},
 		headerTintColor:
 			Platform.OS === 'android' ? 'white' : selectedCategory.color,
