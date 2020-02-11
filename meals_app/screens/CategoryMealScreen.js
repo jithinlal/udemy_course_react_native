@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { CATEGORIES, MEALS } from '../data/dummy-data';
-import MealList from '../Components/MealList';
+import MealList from '../components/MealList';
 
 const CategoryMealScreen = props => {
 	const categoryId = props.navigation.getParam('categoryId');

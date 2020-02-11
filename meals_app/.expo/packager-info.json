@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 1206,
+  "packagerPid": 15037,
   "expoServerNgrokUrl": "https://zz-idp.anonymous.meals-app.exp.direct",
   "packagerNgrokUrl": "https://packager.zz-idp.anonymous.meals-app.exp.direct",
-  "ngrokPid": 1236,
+  "ngrokPid": 15068,
   "webpackServerPort": null
 }
