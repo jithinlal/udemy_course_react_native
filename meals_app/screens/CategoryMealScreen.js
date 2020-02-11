@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Platform } from 'react-native';
 
@@ -11,6 +12,14 @@ const CategoryMealScreen = props => {
 	const displayedMeals = availableMeals.filter(
 		meal => meal.categoryIds.indexOf(categoryId) >= 0
 	);
+
+	if (displayedMeals.length === 0) {
+		return (
+			<View style={styles.content}>
+				<Text>No favorites!</Text>
+			</View>
+		);
+	}
 	return <MealList listData={displayedMeals} navigation={props.navigation} />;
 };
 
@@ -28,5 +37,13 @@ CategoryMealScreen.navigationOptions = navigationData => {
 			Platform.OS === 'android' ? 'white' : selectedCategory.color,
 	};
 };
+
+const styles = StyleSheet.create({
+	content: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+});
 
 export default CategoryMealScreen;
