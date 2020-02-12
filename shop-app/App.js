@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { combineReducers, createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
-import productsReducer from './store/reducers/products.reducers';
-import ShopNavigation from './navigation/ShopNavigator';
+
+import productsReducer from './store/reducers/products';
+import ShopNavigator from './navigation/ShopNavigator';
 
 const rootReducer = combineReducers({
 	products: productsReducer,
@@ -23,16 +24,18 @@ export default function App() {
 	const [fontLoaded, setFontLoaded] = useState(false);
 
 	if (!fontLoaded) {
-		<AppLoading
-			startAsync={fetchFonts}
-			onFinish={() => {
-				setFontLoaded(true);
-			}}
-		/>;
+		return (
+			<AppLoading
+				startAsync={fetchFonts}
+				onFinish={() => {
+					setFontLoaded(true);
+				}}
+			/>
+		);
 	}
 	return (
 		<Provider store={store}>
-			<ShopNavigation />
+			<ShopNavigator />
 		</Provider>
 	);
 }
