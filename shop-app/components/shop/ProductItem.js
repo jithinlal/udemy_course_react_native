@@ -4,6 +4,7 @@ import Colors from '../../constants/Colors';
 
 const ProductItem = props => {
 	return (
+		// a card type list item
 		<View style={styles.product}>
 			<View style={styles.imageContainer}>
 				<Image style={styles.image} source={{ uri: props.item.imageUrl }} />
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.26,
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 8,
-		elevation: 5,
+		elevation: 5, // elevation is required for android to show the shadow feature
 		borderRadius: 10,
 		backgroundColor: 'white',
 		height: 300,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
 		height: '60%',
 		borderTopLeftRadius: 10,
 		borderTopRightRadius: 10,
-		overflow: 'hidden',
+		overflow: 'hidden', // for the image to not overflow the container
 	},
 	image: {
 		width: '100%',
