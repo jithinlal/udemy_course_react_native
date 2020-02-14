@@ -1,15 +1,16 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
 import { Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
-import OrdersScreen from '../screens/shop/OrdersScreen';
-import Colors from '../constants/Colors';
 import CartScreen from '../screens/shop/CartScreen';
-import { Ionicons } from '@expo/vector-icons';
+import OrdersScreen from '../screens/shop/OrdersScreen';
+import UserProductsScreen from '../screens/user/UserProductsScreen';
+import Colors from '../constants/Colors';
 
 const defaultNavOptions = {
 	headerStyle: {
@@ -32,11 +33,11 @@ const ProductsNavigator = createStackNavigator(
 	},
 	{
 		navigationOptions: {
-			drawerIcon: draweConfig => (
+			drawerIcon: drawerConfig => (
 				<Ionicons
 					name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
 					size={23}
-					color={draweConfig.tintColor}
+					color={drawerConfig.tintColor}
 				/>
 			),
 		},
@@ -50,11 +51,29 @@ const OrdersNavigator = createStackNavigator(
 	},
 	{
 		navigationOptions: {
-			drawerIcon: draweConfig => (
+			drawerIcon: drawerConfig => (
 				<Ionicons
 					name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
 					size={23}
-					color={draweConfig.tintColor}
+					color={drawerConfig.tintColor}
+				/>
+			),
+		},
+		defaultNavigationOptions: defaultNavOptions,
+	}
+);
+
+const AdminNavigator = createStackNavigator(
+	{
+		UserProducts: UserProductsScreen,
+	},
+	{
+		navigationOptions: {
+			drawerIcon: drawerConfig => (
+				<Ionicons
+					name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+					size={23}
+					color={drawerConfig.tintColor}
 				/>
 			),
 		},
@@ -66,6 +85,7 @@ const ShopNavigator = createDrawerNavigator(
 	{
 		Products: ProductsNavigator,
 		Orders: OrdersNavigator,
+		Admin: AdminNavigator,
 	},
 	{
 		contentOptions: {
