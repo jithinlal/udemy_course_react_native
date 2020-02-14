@@ -1,4 +1,5 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/cart.action';
+import { ADD_ORDER } from '../actions/orders.action';
 import CartItem from '../../models/cart-item';
 
 const initialState = {
@@ -60,6 +61,14 @@ export default (state = initialState, action) => {
 			};
 			break;
 
+		/* important concept in redux
+		 * every action can be seen by every reducer
+		 * it is the reducers job to differentiate btw
+		 * what can be taken and what not to be taken
+		 */
+		case ADD_ORDER:
+			return initialState;
+			break;
 		default:
 			break;
 	}
