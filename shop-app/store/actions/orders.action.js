@@ -39,12 +39,13 @@ export const fetchOrders = () => {
 };
 
 export const addOrder = (cartItems, totalAmount) => {
-	return async dispatch => {
+	return async (dispatch, getState) => {
+		const token = getState().auth.token;
 		try {
 			const date = new Date();
 			// any async functions goes here
 			const response = await fetch(
-				'https://udemy-react-native-ea174.firebaseio.com/orders/u1.json',
+				`https://udemy-react-native-ea174.firebaseio.com/orders/u1.json?auth=${token}`,
 				{
 					method: 'POST',
 					headers: {
