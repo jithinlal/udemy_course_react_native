@@ -1,3 +1,4 @@
+import { AUTH_KEY } from '../../config';
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
 
@@ -5,7 +6,7 @@ export const signup = (email, password) => {
 	return async dispatch => {
 		try {
 			const response = await fetch(
-				`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBpleDIdJnFhjwGyN7D0ORTfIYMtWa3JrU`,
+				`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${AUTH_KEY}`,
 				{
 					method: 'POST',
 					headers: {
@@ -47,7 +48,7 @@ export const login = (email, password) => {
 	return async dispatch => {
 		try {
 			const response = await fetch(
-				`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBpleDIdJnFhjwGyN7D0ORTfIYMtWa3JrU`,
+				`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${AUTH_KEY}`,
 				{
 					method: 'POST',
 					headers: {

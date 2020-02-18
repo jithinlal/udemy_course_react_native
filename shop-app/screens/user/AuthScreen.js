@@ -155,7 +155,7 @@ const AuthScreen = props => {
 						</View>
 						<View style={styles.buttonContainer}>
 							<Button
-								title={`Switch to ${isSignup ? 'Signup' : 'Login'}`}
+								title={`Switch to ${isSignup ? 'Login' : 'Signup'}`}
 								color={Colors.accent}
 								onPress={() => {
 									setIsSignup(prevState => !prevState);
