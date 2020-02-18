@@ -4,6 +4,7 @@ import {
 	FlatList,
 	ActivityIndicator,
 	View,
+	Text,
 	StyleSheet,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -36,6 +37,15 @@ const OrdersScreen = props => {
 			</View>
 		);
 	}
+
+	if (orders.length === 0) {
+		return (
+			<View style={styles.centered}>
+				<Text>No orders found for this user, add some</Text>
+			</View>
+		);
+	}
+
 	return (
 		<FlatList
 			data={orders}

@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
+	View,
+	Text,
 	FlatList,
+	Button,
 	Platform,
 	ActivityIndicator,
 	StyleSheet,
-	Text,
-	View,
-	Button,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -14,7 +14,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/ui/HeaderButton';
 import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cart.action';
-import * as productActions from '../../store/actions/products.action';
+import * as productsActions from '../../store/actions/products.action';
 import Colors from '../../constants/Colors';
 
 const ProductsOverviewScreen = props => {
@@ -28,17 +28,18 @@ const ProductsOverviewScreen = props => {
 		setError(null);
 		setIsRefreshing(true);
 		try {
-			await dispatch(productActions.fetchProducts());
-		} catch (error) {
-			setError(error.message);
+			await dispatch(productsActions.fetchProducts());
+		} catch (err) {
+			setError(err.message);
 		}
 		setIsRefreshing(false);
 	}, [dispatch, setIsLoading, setError]);
 
 	useEffect(() => {
-		const willFocusSub = props.navigation.addListener('willFocus', () => {
-			loadProducts();
-		});
+		const willFocusSub = props.navigation.addListener(
+			'willFocus',
+			loadProducts
+		);
 
 		return () => {
 			willFocusSub.remove();
@@ -62,12 +63,12 @@ const ProductsOverviewScreen = props => {
 	if (error) {
 		return (
 			<View style={styles.centered}>
-				<Text>An error occured</Text>
+				<Text>An error occurred!</Text>
 				<Button
 					title='Try again'
 					onPress={loadProducts}
 					color={Colors.primary}
-				></Button>
+				/>
 			</View>
 		);
 	}
@@ -75,10 +76,7 @@ const ProductsOverviewScreen = props => {
 	if (isLoading) {
 		return (
 			<View style={styles.centered}>
-				<ActivityIndicator
-					size='large'
-					color={Colors.primary}
-				></ActivityIndicator>
+				<ActivityIndicator size='large' color={Colors.primary} />
 			</View>
 		);
 	}
@@ -86,7 +84,7 @@ const ProductsOverviewScreen = props => {
 	if (!isLoading && products.length === 0) {
 		return (
 			<View style={styles.centered}>
-				<Text>No products found, maybe add some</Text>
+				<Text>No products found. Maybe start adding some!</Text>
 			</View>
 		);
 	}
@@ -155,11 +153,7 @@ ProductsOverviewScreen.navigationOptions = navData => {
 };
 
 const styles = StyleSheet.create({
-	centered: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
+	centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 });
 
 export default ProductsOverviewScreen;
